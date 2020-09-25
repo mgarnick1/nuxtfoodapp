@@ -1,8 +1,7 @@
 <template>
   <main class="container">
     <AppHeader />
-    <import AppRestaurantInfo from '@/components/AppRestaurantInfo.vue';
-    :datasource="fooddata" />
+    <AppRestaurantInfo :datasource="fooddata" />
   </main>
 </template>
 
@@ -12,7 +11,13 @@ import AppRestaurantInfo from "@/components/AppRestaurantInfo.vue";
 export default {
   components: {
     AppHeader,
-    AppRestaurantInfo
+    AppRestaurantInfo: () =>
+      import(/* webpackPrefetch: true */ "@/components/AppRestaurantInfo.vue")
+  },
+  computed: {
+    fooddata() {
+      return this.$store.state.fooddata;
+    }
   }
 };
 </script>
