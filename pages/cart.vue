@@ -32,6 +32,7 @@
           </tr>
         </tbody>
       </table>
+      <button @click="emptyCart">Empty Cart</button>
     </section>
   </main>
 </template>
@@ -41,6 +42,11 @@ import AppEmptyCart from "@/components/AppEmptyCart.vue";
 export default {
   components: {
     AppEmptyCart
+  },
+  methods: {
+    emptyCart() {
+      this.$store.commit("removeCart");
+    }
   },
   computed: {
     cart() {
@@ -53,4 +59,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+button {
+  float: right;
+}
+</style>

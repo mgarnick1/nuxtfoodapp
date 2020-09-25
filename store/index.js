@@ -31,6 +31,9 @@ export const mutations = {
   },
   updateFoodData: (state, data) => {
     state.fooddata = data;
+  },
+  removeCart: (state) => {
+    state.cart = [];
   }
 };
 
