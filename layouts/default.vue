@@ -1,20 +1,28 @@
 <template>
   <div>
-    <Nuxt />
+    <div class="content">
+      <AppMenu />
+      <Nuxt />
+    </div>
+    <AppFooter />
   </div>
 </template>
 
+<script>
+import AppMenu from "@/components/AppMenu.vue";
+import AppFooter from "@/components/AppFooter.vue";
+export default {
+  components: {
+    AppMenu,
+    AppFooter
+  }
+};
+</script>
+
 <style>
 html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Mulish", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300px;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -58,5 +66,13 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Poppins";
+  font-weight: 600;
 }
 </style>
