@@ -33,14 +33,19 @@
         <div v-for="addon in currentItem.addOns" :key="addon">
           <input
             type="checkbox"
+            :id="addon"
             name="addon"
             value="addon"
-            :id="addon"
             v-model="itemAddons"
           />
           <label :for="addon">{{ addon }}</label>
         </div>
       </fieldset>
+      <app-toast v-if="cartSubmitted">
+        Order Added!
+        <br />
+        <nuxt-link to="/restaurants">restaurants</nuxt-link>
+      </app-toast>
     </section>
     <section class="options">
       <h3>Description</h3>
@@ -51,7 +56,11 @@
 
 <script>
 import { mapState } from "vuex";
+import AppToast from "@/components/AppToast.vue";
 export default {
+  components: {
+    AppToast
+  },
   data() {
     return {
       id: this.$route.params.id,
