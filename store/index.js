@@ -12,13 +12,15 @@ export const state = () => ({
 export const getters = {
   cartCount: state => {
     if (!state.cart.length) {
-      return state.cart.reduce((ac, next) => ac + +next.count, 0);
+      return 0;
     }
+    return state.cart.reduce((ac, next) => ac + +next.count, 0);
   },
   totalPrice: state => {
     if (!state.cart.length) {
-      return state.cart.reduce((ac, next) => ac + +next.combinedPrice, 0);
+      return 0;
     }
+    return state.cart.reduce((ac, next) => ac + +next.combinedPrice, 0);
   }
 };
 

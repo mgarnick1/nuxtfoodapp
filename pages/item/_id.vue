@@ -9,7 +9,7 @@
       <h3>Price: ${{ currentItem.price.toFixed(2) }}</h3>
       <div class="quantity">
         <input type="number" min="1" v-model="count" />
-        <button class="primary">Add to Cart - ${{ combinedPrice }}</button>
+        <button class="primary" @click="addToCart">Add to Cart - ${{ combinedPrice }}</button>
       </div>
       <fieldset v-if="currentItem.options">
         <legend>
@@ -41,11 +41,11 @@
           <label :for="addon">{{ addon }}</label>
         </div>
       </fieldset>
-      <app-toast v-if="cartSubmitted">
+      <AppToast v-if="cartSubmitted">
         Order Added!
         <br />
         <nuxt-link to="/restaurants">restaurants</nuxt-link>
-      </app-toast>
+      </AppToast>
     </section>
     <section class="options">
       <h3>Description</h3>
