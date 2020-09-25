@@ -32,7 +32,10 @@
           </tr>
         </tbody>
       </table>
-      <button @click="emptyCart">Empty Cart</button>
+      <div>
+        <button class="empty" @click="emptyCart">Empty Cart</button>
+        <button class="checkout" @click="emptyCart">Checkout</button>
+      </div>
     </section>
   </main>
 </template>
@@ -60,7 +63,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-button {
+.empty {
+  float: left;
+}
+.checkout {
   float: right;
 }
 </style>
