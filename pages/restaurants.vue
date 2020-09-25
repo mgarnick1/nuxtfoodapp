@@ -3,7 +3,7 @@
     <div class="restaurantheading">
       <h1>Restaurants</h1>
 
-      <app-select
+      <AppSelect
         @change="selectedRestaurant = $event"
         :selectoptions="restaurantOptions"
       />
@@ -20,7 +20,7 @@ import { mapState } from "vuex";
 export default {
   components: {
     AppSelect,
-    AppRestaurantInfo: () => import("@/components/AppRestaurantInfo.vue")
+    AppRestaurantInfo
   },
   data() {
     return {
