@@ -26,6 +26,7 @@
           <label :for="option">{{ option }}</label>
         </div>
       </fieldset>
+
       <fieldset v-if="currentItem.addOns">
         <legend>
           <h3>Add Ons</h3>
@@ -35,17 +36,17 @@
             type="checkbox"
             :id="addon"
             name="addon"
-            value="addon"
+            :value="addon"
             v-model="itemAddons"
           />
           <label :for="addon">{{ addon }}</label>
         </div>
       </fieldset>
-      <AppToast v-if="cartSubmitted">
+      <app-toast v-if="cartSubmitted">
         Order Added!
         <br />
-        <nuxt-link to="/restaurants">restaurants</nuxt-link>
-      </AppToast>
+        <nuxt-link to="/Cart">Cart</nuxt-link>
+      </app-toast>
     </section>
     <section class="options">
       <h3>Description</h3>
