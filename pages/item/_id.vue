@@ -9,7 +9,9 @@
       <h3>Price: ${{ currentItem.price.toFixed(2) }}</h3>
       <div class="quantity">
         <input type="number" min="1" v-model="count" />
-        <button class="primary" @click="addToCart">Add to Cart - ${{ combinedPrice }}</button>
+        <button class="primary" @click="addToCart">
+          Add to Cart - ${{ combinedPrice }}
+        </button>
       </div>
       <fieldset v-if="currentItem.options">
         <legend>
@@ -21,7 +23,7 @@
             name="option"
             :id="option"
             :value="option"
-            v-model="itemOptions"
+            v-model="$v.itemOptions.$model"
           />
           <label :for="option">{{ option }}</label>
         </div>
@@ -37,7 +39,7 @@
             :id="addon"
             name="addon"
             :value="addon"
-            v-model="itemAddons"
+            v-model="$v.itemAddons.$model"
           />
           <label :for="addon">{{ addon }}</label>
         </div>
@@ -46,6 +48,10 @@
         Order Added!
         <br />
         <nuxt-link to="/Cart">Cart</nuxt-link>
+      </app-toast>
+      <app-toast v-if="errors">
+        Please select options and
+        <br />addons before continuing
       </app-toast>
     </section>
     <section class="options">
@@ -58,6 +64,7 @@
 <script>
 import { mapState } from "vuex";
 import AppToast from "@/components/AppToast.vue";
+import { required } from "vuelidate/lib/validators";
 export default {
   components: {
     AppToast
@@ -69,8 +76,17 @@ export default {
       itemOptions: "",
       itemAddons: [],
       itemSizeAndCost: [],
-      cartSubmitted: false
+      cartSubmitted: false,
+      errors: false
     };
+  },
+  validations: {
+    itemOptions: {
+      required
+    },
+    itemAddons: {
+      required
+    }
   },
   computed: {
     ...mapState(["fooddata"]),
@@ -100,8 +116,17 @@ export default {
         addOns: this.itemAddons,
         combinedPrice: this.combinedPrice
       };
-      this.cartSubmitted = true;
-      this.$store.commit("addToCart", formOutput);
+      let addOnError = this.$v.itemAddons.$invalid;
+      let optionError = this.currentItem.options
+        ? this.$v.itemOptions.$invalid
+        : false;
+      if (addOnError || optionError) {
+        this.errors = true;
+      } else {
+        this.errors = false;
+        this.cartSubmitted = true;
+        this.$store.commit("addToCart", formOutput);
+      }
     }
   }
 };
